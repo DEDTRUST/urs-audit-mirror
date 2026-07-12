@@ -1,0 +1,13 @@
+{
+  "framework": "HIPAA Security Rule — Technical Safeguards (45 CFR § 164.312)",
+  "assessment_type": "SELF-ASSESSMENT EVIDENCE PACKAGE — NOT a compliance attestation. HIPAA compliance is determined by a covered entity's or business associate's own risk analysis. This maps the URS/DUX integrity & audit mechanisms to the technical safeguards.",
+  "scope_note": "The URS substrate processes interface state, not ePHI. These map the INTEGRITY and AUDIT-CONTROL mechanisms a PHI-handling deployment would build on.",
+  "evidence_root": { "master_session_root": "cb80d4ef4de1e108ccb2ba48366fef890b93c6bf4ec2f5df3472a04d25603535", "audit_seal": "15eb0f1606be29d3b58efa3dff848a5519bdd5039e19999fb1a54a70eeae0418", "hash_function": "SHA256d", "scenarios": 1000000 },
+  "safeguards": [
+    { "citation": "164.312(b)", "name": "Audit controls", "type": "required", "how_satisfied": "Every processed scenario is recorded as a SHA-256d frame seal, folded into a reproducible Merkle audit trail.", "evidence": "chunks = 100, master_session_root = cb80d4ef4de1e108ccb2ba48366fef890b93c6bf4ec2f5df3472a04d25603535" },
+    { "citation": "164.312(c)(1)", "name": "Integrity — protect from improper alteration/destruction", "type": "required", "how_satisfied": "Deterministic sealing: any change to a frame breaks its SHA-256d seal and the master root.", "evidence": "self_verified = 1000000/1000000; run reproduces bit-for-bit" },
+    { "citation": "164.312(c)(2)", "name": "Mechanism to authenticate ePHI (detect alteration)", "type": "addressable", "how_satisfied": "Seal re-verification is the alteration-detection mechanism; a mismatch flags tampering.", "evidence": "frame.verify() + audit verify command" },
+    { "citation": "164.312(e)(2)(i)", "name": "Transmission integrity controls", "type": "addressable", "how_satisfied": "The seal chain travels with the data; a recipient recomputes and confirms it end-to-end.", "evidence": "master_session_root recomputes from frame seals" },
+    { "citation": "164.312(a)(1)", "name": "Access control — unique context per subject", "type": "required", "how_satisfied": "Each user's signals compile to their own sealed reality (per-user determinism), so state is not shared across subjects.", "evidence": "distinct intents/destinations covered = 5/4" }
+  ]
+}

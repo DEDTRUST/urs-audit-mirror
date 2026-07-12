@@ -1,0 +1,27 @@
+{
+  "purpose": "External timestamp anchor for the sovereign artifact bundle",
+  "bundle_root": "56dca82e985024e5fe341b0a1ac48a385be724794d816ca49af092024cd279c8",
+  "bundle_root_sha256": "56dca82e985024e5fe341b0a1ac48a385be724794d816ca49af092024cd279c8",
+  "hash": "sha256",
+  "op_return_payload": "URS1|56dca82e985024e5fe341b0a1ac48a385be724794d816ca49af092024cd279c8",
+  "ots_stamp_target": "store/BUNDLE_ROOT",
+  "ots_proof_file": "store/BUNDLE_ROOT.ots",
+  "ots_proof_sha256": "PENDING",
+  "anchor_method": "OpenTimestamps (recommended) or OP_RETURN (wallet broadcast)",
+  "anchor_methods": [
+    "OpenTimestamps: ots stamp store/BUNDLE_ROOT  (then ots upgrade/verify)",
+    "Bitcoin OP_RETURN: broadcast a tx whose OP_RETURN output = the op_return_payload above",
+    "Ethereum: emit an event / calldata carrying the bundle_root"
+  ],
+  "anchor_instructions": "Run 'ots stamp store/BUNDLE_ROOT' to create an OTS proof, then 'ots verify'. To publish on-chain, broadcast an OP_RETURN tx carrying op_return_payload. Record the resulting txid and ots_proof_sha256 here.",
+  "existing_reference_anchor": "Bitcoin block 943847 (frozen governance reference, not a bundle tx)",
+  "txid": "PENDING",
+  "status": "unbroadcast",
+  "operator": "Dwayne Edwards",
+  "operator_contact": "edwardsdwayne869@gmail.com",
+  "notes": [
+    "The anchor txid is recorded here once broadcast.",
+    "The anchor file is intentionally separate from the bundle so it never changes the bundle root.",
+    "Independent verifiers can run 'ots verify' on the OTS proof and confirm it commits to the bundle_root."
+  ]
+}

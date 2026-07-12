@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# ============================================================================
+# DYNASTY SOVEREIGN RECORD VERIFICATION HARNESS
+# © 2026 SSV Sentinel LLC — D-Edwards SPV Trust
+#
+# One command → AUDIT PROOF: PASS iff every sovereign record reproduces its
+# pinned master root bit-for-bit. A record is agent-proof when it REPRODUCES,
+# not when someone argues about it. Wall-clock is never sealed (§12.1).
+#
+# UPGRADE #5: expected roots come from ONE source of truth —
+# validation/records/dynasty_records_manifest.json — not hardcoded here.
+# ============================================================================
+set -euo pipefail
+cd "$(dirname "$0")"
+
+MANIFEST="validation/records/dynasty_records_manifest.json"
+FAIL=0
+pass() { echo "  [PASS] $1"; }
+fail() { echo "  [FAIL] $1"; FAIL=1; }
+
+echo "══════════════════════════════════════════════════════════════"
+echo "  DYNASTY SOVEREIGN RECORD VERIFICATION (manifest-driven)"
+echo "══════════════════════════════════════════════════════════════"
+[ -f "$MANIFEST" ] || { echo "  [FAIL] missing manifest $MANIFEST"; exit 1; }
+
+# ── Record: Spintronic Lattice Metrics ──────────────────────────────────────
+echo "▶ SPINTRONIC_LATTICE_METRICS"
+LAT_EXPECTED=$(jq -r '.records[] | select(.name=="SPINTRONIC_LATTICE_METRICS") | .expected_master_root' "$MANIFEST")
+LAT_ARTIFACT=$(jq -r '.records[] | select(.name=="SPINTRONIC_LATTICE_METRICS") | .artifact' "$MANIFEST")
+
+if [ -f "$LAT_ARTIFACT" ]; then
+  STORED=$(jq -r '.master_root' "$LAT_ARTIFACT")
+  [ "$STORED" = "$LAT_EXPECTED" ] && pass "artifact root matches manifest" \
+    || fail "artifact root $STORED != manifest $LAT_EXPECTED"
+else
+  fail "missing artifact $LAT_ARTIFACT"
+fi
+
+( cd DynastySubstrate && cargo build --release --offline --features spintronic_lattice \
+    --bin spintronic_lattice_metrics >/dev/null 2>&1 )
+ACTUAL=$(./DynastySubstrate/target/release/spintronic_lattice_metrics 2>/dev/null \
+  | grep -oE 'MASTER ROOT *: [a-f0-9]{64}' | grep -oE '[a-f0-9]{64}')
+[ "$ACTUAL" = "$LAT_EXPECTED" ] && pass "live re-run reproduces root bit-for-bit" \
+  || fail "live re-run root $ACTUAL != manifest $LAT_EXPECTED"
+
+# ── Record: URS escalation (current tier, read from manifest — tier-agnostic) ─
+DUX_SEAL="e7a4d4c860b1aa2c41573bb14c6809906d2bf7146307e6a9ed47b2afb7263b94"
+URS_NAME=$(jq -r '.records[] | select(.name|startswith("URS_TIER")) | .name' "$MANIFEST" | tail -1)
+URS_PROOF=$(jq -r --arg n "$URS_NAME" '.records[] | select(.name==$n) | .artifact' "$MANIFEST")
+URS_MSR=$(jq -r --arg n "$URS_NAME" '.records[] | select(.name==$n) | .expected_master_session_root' "$MANIFEST")
+URS_DISP=$(jq -r --arg n "$URS_NAME" '.records[] | select(.name==$n) | (.dispatches_represented // .real_dispatches)' "$MANIFEST")
+echo "▶ $URS_NAME"
+if ( cd urs && cargo run --release --offline -q -p urs_escalation --bin urs_escalation -- \
+      verify "proof/$(basename "$URS_PROOF")" "$DUX_SEAL" >/dev/null 2>&1 ); then
+  pass "${URS_DISP}-dispatch proof reproduces (MSR ${URS_MSR:0:8}…)"
+else
+  fail "$URS_NAME verify did not reproduce"
+fi
+
+# ── Record: URS scenario audit (fabric — latest SCENARIO_AUDIT record) ───────
+SC_NAME=$(jq -r '.records[] | select(.name|endswith("SCENARIO_AUDIT")) | .name' "$MANIFEST" | tail -1)
+if [ -n "$SC_NAME" ] && [ "$SC_NAME" != "null" ]; then
+  SC_PROOF=$(jq -r --arg n "$SC_NAME" '.records[] | select(.name==$n) | .artifact' "$MANIFEST")
+  SC_MSR=$(jq -r --arg n "$SC_NAME" '.records[] | select(.name==$n) | .expected_master_session_root' "$MANIFEST")
+  SC_N=$(jq -r --arg n "$SC_NAME" '.records[] | select(.name==$n) | .scenarios' "$MANIFEST")
+  echo "▶ $SC_NAME"
+  if ( cd urs && cargo run --release --offline -q -p urs_fabric --bin urs_scenarios -- \
+        verify "proof/$(basename "$SC_PROOF")" >/dev/null 2>&1 ); then
+    pass "${SC_N}-scenario audit reproduces (MSR ${SC_MSR:0:8}…)"
+  else
+    fail "$SC_NAME verify did not reproduce"
+  fi
+fi
+
+echo "══════════════════════════════════════════════════════════════"
+[ "$FAIL" -eq 0 ] && { echo "AUDIT PROOF: PASS"; exit 0; } || { echo "AUDIT PROOF: FAIL"; exit 1; }

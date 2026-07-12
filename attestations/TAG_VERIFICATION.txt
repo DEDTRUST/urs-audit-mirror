@@ -1,0 +1,58 @@
+Tag verification record
+-----------------------
+
+Repository:                URS / DUX (ecosystem-directory)
+Commit referenced by tag:  4449e3d
+Tag name:                  v1.2.0
+
+Tagger (GPG) key ID:       0BBD9D4EBF822348
+Tagger full fingerprint:   459A ECD6 41EA FBA2 FAE5  5F9C 0BBD 9D4E BF82 2348
+Public key file:           attestations/publickey.asc
+Public key SHA-256:        cb8c33c0c32affd6fcf1cf92474dd94c90ba8806cca4d73f4e25e0eb4a917eb2
+
+Local verification commands run by operator:
+  git fetch origin --tags
+  git tag -v v1.2.0
+
+Status:                    VERIFIED — Good signature.
+
+Local verification output (`git tag -v v1.2.0`, run by the operator):
+  ----- BEGIN PASTE: git tag -v v1.2.0 OUTPUT -----
+  object 4449e3de5c7cd120477d050e272b806d5da74e6e
+  type commit
+  tag v1.2.0
+  tagger DEDTRUST <manager@dedwardsholding.com> 1783809422 -0500
+
+  URS/DUX v1.2.0 - Tier14 8c2e2906 | 1M cb80d4ef | bundle 56dca82e
+  gpg: Signature made 07/11/26 17:37:02 Central Daylight Time
+  gpg:                using EDDSA key 459AECD641EAFBA2FAE55F9C0BBD9D4EBF822348
+  gpg: Good signature from "dwayne edwards <edwardsdwayne869@gmail.com>" [ultimate]
+  ----- END PASTE -----
+
+Tagged commit:             4449e3de5c7cd120477d050e272b806d5da74e6e
+Signing key (EDDSA):       459AECD641EAFBA2FAE55F9C0BBD9D4EBF822348 (0BBD9D4EBF822348)
+Signature made:            2026-07-11 17:37:02 CDT (UTC-05:00)
+Operator:                  Dwayne Edwards
+Operator email:            edwardsdwayne869@gmail.com
+
+Pinned roots bound by this tag:
+  Tier-14 escalation MSR :  8c2e29062c977d2c1d6e21b359a63481e3d46a7a825af23ecafab373f947da8a
+  1M scenario master root:  cb80d4ef4de1e108ccb2ba48366fef890b93c6bf4ec2f5df3472a04d25603535
+  Spintronic lattice root:  5d64e56c865334bac0766e17a0153e712891d68764b39dbf37c1ab2d2bc8de2b
+  Artifact bundle root   :  56dca82e985024e5fe341b0a1ac48a385be724794d816ca49af092024cd279c8
+
+Notes:
+- The public key file `attestations/publickey.asc` is published in this repo and
+  its SHA-256 is recorded above; it also lives in the branch head so auditors can
+  import it directly.
+- The tag is signed with the private half of 0BBD9D4EBF822348 (the private key
+  stays with the operator; it is never in this repo or the build environment).
+- The tagger line shows the git committer identity (DEDTRUST); the cryptographic
+  signature is from the key owned by dwayne edwards <edwardsdwayne869@gmail.com>,
+  which is what "Good signature" confirms.
+- Signed tag v1.2.0 pushed to origin (refs/tags/v1.2.0 → 4449e3d).
+- Anyone can re-verify: `git fetch origin --tags && git tag -v v1.2.0` (after
+  importing attestations/publickey.asc), and reproduce the roots with
+  `./independent_verify.sh`.
+
+Signed-off-by: Dwayne Edwards

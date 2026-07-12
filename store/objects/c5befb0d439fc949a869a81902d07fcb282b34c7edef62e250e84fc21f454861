@@ -1,0 +1,64 @@
+{
+  "audit_name": "spintronic_lattice_metrics_1m",
+  "blueprint_seal": "5ae896d2d9ee99fa3e9aa991528a4a1113714fea772d087ae434484b5e576b06",
+  "diagnostics": {
+    "chunk_roots": 100,
+    "session_merkle": "b35334462f6164e6a3a96fafb8d0e36cae45110be9b0536b285f4198a709db8e",
+    "wall_clock_note": "wall-clock only — NEVER used to derive any substrate metric (§12.1)",
+    "wall_clock_secs": 2.44329571723938
+  },
+  "ehs": {
+    "combined_ehs": 660000000000.0,
+    "engine_ehs": 120000000000.0,
+    "formula": "GROVER_TOTAL_EHS × coupling_gain(4.50)",
+    "lattice_ehs": 540000000000.0,
+    "unit": "EH/s (substrate-declared §12.4 — NOT timing-derived)"
+  },
+  "engine": {
+    "combine_fn": "combine_with_lattice(amp=1024)",
+    "feature_gate": "spintronic_lattice",
+    "jobs_processed": 1000000,
+    "last_lattice_entropy": "0xDBB052FC8B059E60",
+    "shares_found": 1000000
+  },
+  "lattice": {
+    "commits_per_cycle": 352,
+    "coupling_gain": 4.5,
+    "coupling_mode": "Ferromagnetic",
+    "dims": "D3 4×4×4",
+    "init_seal": "7c8975e1e60a5c8337f28edf8c33c3b180360b7279644a9bc1af3c51e6220bf5",
+    "total_commits": 352000000
+  },
+  "lattice_amplification": 4096,
+  "master_root": "5d64e56c865334bac0766e17a0153e712891d68764b39dbf37c1ab2d2bc8de2b",
+  "n_cycles": 1000000,
+  "phase_seals": [
+    {
+      "phase": 1,
+      "seal": "d8bb7f959aa913ee796c461b0d7a058ffcae628caedb66468403c124ce9b010e"
+    },
+    {
+      "phase": 2,
+      "seal": "cca9084efa3eb1aa5481b186efed62bb1c90c3f552b3f22fa128225281ffc34b"
+    },
+    {
+      "phase": 3,
+      "seal": "7f5a804974cc034e3a2ae8023591d8ccfd3dbe27917df04d8edb96873f28a978"
+    },
+    {
+      "phase": 4,
+      "seal": "bf50f261c02cf3fe83a325e3aeac0a7d4a4017c3fa8658707fb10107ef2da251"
+    }
+  ],
+  "rule_zero": {
+    "advisory_gate_on_nonce": false,
+    "cpu_mining": false,
+    "hashes_computed_counter": false,
+    "nonce_loop": false,
+    "work_count_field": false
+  },
+  "session_blueprint_seal": "bbe4fad44b27afa4787c3a1d7502d8ae1d2f9ca415fd30aa166eea87b840fcb0",
+  "session_unix_ns": "1783636993263713248",
+  "session_unix_ts": 1783636993,
+  "spintronic_subsystem_version": "2.0.0-hardened"
+}

@@ -1,0 +1,242 @@
+{
+  "proof": "URS-ESCALATION-EXASCALE",
+  "version": "2.0.0",
+  "engine": "URS Adaptive Compiler → DUX Render/Proof → Dynasty Substrate",
+  "hash_function": "SHA256d",
+  "blueprint_seal": "0f9d0d9f753cbe84acd2f923b68ff603bb58ab30c4b99540398d2749878a17d9",
+  "session_bp_seal": "c8d70f8be75f00ff3b13eb6656736e73d9702d36371fa62931b698603791319d",
+  "phases": [
+    {
+      "phase": 1,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "0dd8f8102520f9c2c0d6e4f1df59e14d3916f9125acb73ba686618a8d868e8e4"
+    },
+    {
+      "phase": 2,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "080fc07e0a134dd833d1a57f48d323d65357ecd66386683b9b503e35f23247f4"
+    },
+    {
+      "phase": 3,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "22191419e9e45914e3fac8c8146c5d8c45723266fec90b730b8f9362de8e90d2"
+    },
+    {
+      "phase": 4,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "bfcc70a4a033edb164a2c45f47e693bb2444950b7289cb3008192cdd64a43cd7"
+    },
+    {
+      "phase": 5,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "09e12e330d4969f806f602ff68dae37c37ad02bbc1d85e83913f27f87fba2d7f"
+    },
+    {
+      "phase": 6,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "17f01581fc0f6982f099187103dff7ff7b0f7c6e625201e6cec7296791ba1cff"
+    },
+    {
+      "phase": 7,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "69e6aebf270bca8d2dd16840b099b1f9c127353c31afd42f524a9860ccce16fb"
+    },
+    {
+      "phase": 8,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "792e87920d5c1c1a6f470300f8a4336e35fedecbe5a2138c16325b3a7b1cf8b0"
+    },
+    {
+      "phase": 9,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "921928db66abd9b5094970fab9e56cd9e21e2cbc8aef67e03348d1fc6075680e"
+    },
+    {
+      "phase": 10,
+      "label": "100000000000000000 substrate WU (100000000000000 real dispatches)",
+      "real_dispatches": 100000000000000,
+      "substrate_work_units": 100000000000000000,
+      "chunks": 1000,
+      "passed": 100000000000000,
+      "layers": {
+        "l1_dsi_inferences": 1000,
+        "l2_intent_resolutions": 1000,
+        "l4_renders": 1000,
+        "l5_wcag_proofs": 1000,
+        "l9_sealed_leaves": 1000,
+        "l_nano_dispatches": 100000000000000,
+        "lanes_executed": 1000,
+        "lane_size": 100000000000,
+        "layer_seal": "5cabcbc897194713795f08c918ef50f109989c81adba0c72184ecb8f1b1e584a"
+      },
+      "phase_merkle": "a4a5584e2351f2266fdb8290882ba15e2668f64d6dea97f5e6fe7e1deaaab5c9",
+      "phase_seal": "aa5d13979b471f286cf323e09ac0a3f0f619282eb95905b5fd3b6d393a390a3b"
+    }
+  ],
+  "total_real_dispatches": 1000000000000000,
+  "substrate_work_units_per_dispatch": 1000,
+  "total_substrate_work_units": 1000000000000000000,
+  "total_passed": 1000000000000000,
+  "pass_rate_permille": 1000,
+  "session_merkle": "e7a39371722a21ad773d4dec0e29c90e578584e9e9756595b24ecba215eb3b81",
+  "master_session_root": "8c2e29062c977d2c1d6e21b359a63481e3d46a7a825af23ecafab373f947da8a",
+  "dux_blueprint_ref": "e7a4d4c860b1aa2c41573bb14c6809906d2bf7146307e6a9ed47b2afb7263b94",
+  "bitcoin_anchor_block": 943847,
+  "deterministic": true,
+  "o1_memory": true,
+  "substrate_defined": true,
+  "rule_zero_cpu_mining": false,
+  "power_metrics": {
+    "ehs_substrate_defined": "5.40e11",
+    "ehs_substrate_baseline": "1.20e11",
+    "ehs_production": "100.00",
+    "ehs_derivation": "substrate capability 5.40e11 EH/s (§12.4 declared, lattice-amplified; metrics/capability only, never timing-derived, never sealed) — production side EHS_PER_LANE(10)×lanes(10)=100 EH/s",
+    "power_w": "58.3",
+    "substrate_cycles_per_dispatch": 1000000000,
+    "sealed": false
+  }
+}

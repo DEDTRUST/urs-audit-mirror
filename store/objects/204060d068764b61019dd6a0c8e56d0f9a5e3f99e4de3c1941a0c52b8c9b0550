@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# ============================================================================
+# UPGRADE #1 — DETERMINISM CI GATE
+# © 2026 SSV Sentinel LLC — D-Edwards SPV Trust
+#
+# Runs every sealing binary TWICE and asserts the master root is identical.
+# This is the direct antidote to the lattice bug (f0b50116… → dcac1a7c…): it
+# makes §12.1 (deterministic seals) ENFORCED, not aspirational. If any binary's
+# seal is non-deterministic, the build fails here — before it ever ships.
+# ============================================================================
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+echo "══════════════════════════════════════════════════════════════"
+echo "  DETERMINISM GATE — run twice, roots MUST match"
+echo "══════════════════════════════════════════════════════════════"
+
+FAIL=0
+
+# check <label> <root-regex> <build-cmd...> -- <run-cmd...>
+check_binary() {
+  local label="$1" regex="$2"; shift 2
+  local build=() run=()
+  while [ "$1" != "--" ]; do build+=("$1"); shift; done; shift
+  run=("$@")
+  echo "▶ $label"
+  "${build[@]}" >/dev/null 2>&1 || { echo "  [FAIL] build"; FAIL=1; return; }
+  local r1 r2
+  r1=$("${run[@]}" 2>/dev/null | grep -oE "$regex" | grep -oE '[a-f0-9]{64}' | head -1)
+  r2=$("${run[@]}" 2>/dev/null | grep -oE "$regex" | grep -oE '[a-f0-9]{64}' | head -1)
+  if [ -n "$r1" ] && [ "$r1" = "$r2" ]; then
+    echo "  [PASS] deterministic — $r1"
+  else
+    echo "  [FAIL] non-deterministic — run1=$r1 run2=$r2"
+    FAIL=1
+  fi
+}
+
+check_binary "spintronic_lattice_metrics" "MASTER ROOT *: [a-f0-9]{64}" \
+  cargo build --release --offline --features spintronic_lattice --bin spintronic_lattice_metrics --manifest-path DynastySubstrate/Cargo.toml \
+  -- ./DynastySubstrate/target/release/spintronic_lattice_metrics
+
+# Dynasty petabit profile — writes master_session_root to a JSON artifact.
+echo "▶ spintronic_10s_petabit_profile"
+( cd DynastySubstrate && cargo build --release --offline --features spintronic_lattice \
+    --bin spintronic_10s_petabit_profile >/dev/null 2>&1 )
+# Tracked-file-safe: the profile writes a timestamped JSON to CWD. Snapshot the
+# pre-existing set, read only the file this run created, and delete only that —
+# never glob-delete, which would nuke committed sample artifacts in the tree.
+pb_root() {
+  ( cd DynastySubstrate
+    local before after new
+    before=$(ls spintronic_10s_petabit_profile_*.json 2>/dev/null | sort)
+    ./target/release/spintronic_10s_petabit_profile >/dev/null 2>&1
+    after=$(ls spintronic_10s_petabit_profile_*.json 2>/dev/null | sort)
+    new=$(comm -13 <(printf '%s\n' "$before") <(printf '%s\n' "$after") | grep -v '^$' | tail -1)
+    [ -n "$new" ] || return 0
+    python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['master_session_root'])" "$new"
+    rm -f "$new" 2>/dev/null )
+}
+PB1=$(pb_root); PB2=$(pb_root)
+if [ -n "$PB1" ] && [ "$PB1" = "$PB2" ]; then
+  echo "  [PASS] deterministic — $PB1"
+else
+  echo "  [FAIL] non-deterministic — run1=$PB1 run2=$PB2"; FAIL=1
+fi
+
+# URS escalation: verify() re-runs and reproduces; run its own twice-check via a
+# tiny deterministic scale (build once, run run_escalation determinism test).
+echo "▶ urs_escalation (unit determinism test)"
+if ( cd urs && cargo test --release --offline -p urs_escalation escalation_reproduces_twice -- --nocapture >/dev/null 2>&1 ); then
+  echo "  [PASS] escalation reproduces twice (unit test)"
+else
+  echo "  [FAIL] escalation determinism unit test"
+  FAIL=1
+fi
+
+echo "══════════════════════════════════════════════════════════════"
+[ "$FAIL" -eq 0 ] && { echo "DETERMINISM GATE: PASS"; exit 0; } || { echo "DETERMINISM GATE: FAIL"; exit 1; }

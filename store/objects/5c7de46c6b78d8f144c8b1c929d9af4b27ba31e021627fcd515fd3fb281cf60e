@@ -1,0 +1,15 @@
+{
+  "framework": "SOC 2 (AICPA Trust Services Criteria, 2017)",
+  "assessment_type": "SELF-ASSESSMENT EVIDENCE PACKAGE — NOT a SOC 2 report. A SOC 2 report is issued only by a licensed CPA firm after an examination. This maps the URS/DUX technical controls to the relevant criteria with reproducible evidence.",
+  "scope_note": "The URS substrate compiles and seals interface state; it stores and transmits no customer data or PHI itself. These criteria concern the PROCESSING INTEGRITY and audit mechanisms a consuming system relies on.",
+  "evidence_root": { "master_session_root": "cb80d4ef4de1e108ccb2ba48366fef890b93c6bf4ec2f5df3472a04d25603535", "audit_seal": "15eb0f1606be29d3b58efa3dff848a5519bdd5039e19999fb1a54a70eeae0418", "hash_function": "SHA256d", "scenarios": 1000000 },
+  "criteria": [
+    { "id": "CC7.2", "name": "System monitoring detects anomalies", "how_satisfied": "Every processed frame carries a SHA-256d seal that is re-verified; any alteration is detected.", "evidence": "self_verified = 1000000/1000000" },
+    { "id": "CC7.3", "name": "Evaluate security events", "how_satisfied": "Tamper-evident seals let a monitor distinguish a valid frame from an altered one deterministically.", "evidence": "frame.verify() self-check; tamper unit tests" },
+    { "id": "PI1.1", "name": "Processing is complete, valid, accurate, timely, authorized", "how_satisfied": "Deterministic integer pipeline: identical inputs reproduce identical sealed outputs.", "evidence": "master_session_root reproduces bit-for-bit on re-run" },
+    { "id": "PI1.2", "name": "Inputs are complete and accurate", "how_satisfied": "Every scenario input is a fully-specified UserSignals + event; the model is fixed and versioned.", "evidence": "scenarios = 1000000, intents covered = 5" },
+    { "id": "PI1.4", "name": "Output is complete, accurate, and distributed to meet requirements", "how_satisfied": "Every frame is proven accessible (collision-free + WCAG 2.5.8) before it is sealed.", "evidence": "accessible = 1000000/1000000" },
+    { "id": "PI1.5", "name": "Output is stored completely and accurately", "how_satisfied": "Frame seals fold into a SHA-256d Merkle master root; the whole run reproduces from the committed proof.", "evidence": "master_session_root = cb80d4ef4de1e108ccb2ba48366fef890b93c6bf4ec2f5df3472a04d25603535" },
+    { "id": "A1.1", "name": "Capacity is managed", "how_satisfied": "O(1) memory (chunked Merkle) and constant-time processing regardless of scenario count.", "evidence": "chunk_size = 10000, chunks = 100; elapsed report-only" }
+  ]
+}

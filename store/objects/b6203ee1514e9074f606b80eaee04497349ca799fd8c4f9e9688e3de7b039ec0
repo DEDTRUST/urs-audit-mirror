@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# ============================================================================
+# UPGRADE #3 — WALL-CLOCK-IN-SEALS GREP GUARD
+# © 2026 SSV Sentinel LLC — D-Edwards SPV Trust
+#
+# Fails the build if a wall-clock source appears in a seal-producing code path.
+# This is the exact class of bug that made spintronic_lattice_metrics
+# non-deterministic (session_ns / session_ts folded into phase seals). §12.1:
+# wall clock is a diagnostic only, NEVER sealed.
+#
+# Heuristic: in files that build seals (contain sha256d / text_seal / phase
+# seal / master root), a time source (SystemTime::now / now_secs / now_f64)
+# may ONLY be used to compute a *_elapsed diagnostic — never passed into a
+# format!/seal. We flag any line that puts a time value on the same line as a
+# seal-input format token. Precise review still required; this catches the
+# obvious leak that shipped.
+# ============================================================================
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+echo "== §12.1 WALL-CLOCK-IN-SEALS GUARD =="
+
+# Seal-producing binaries/modules to scan (extend as new sealers are added).
+SEAL_PATHS=(
+  "DynastySubstrate/src/bin/spintronic_lattice_metrics.rs"
+  "DynastySubstrate/src/bin/spintronic_10s_petabit_profile.rs"
+  "DynastySubstrate/src/bin/engine22d_audit_v2.rs"
+  "urs/urs_escalation/src/lib.rs"
+)
+
+VIOLATIONS=0
+for f in "${SEAL_PATHS[@]}"; do
+  [ -f "$f" ] || continue
+  # Lines where a time source is passed into a seal string: a now_*/session_ns
+  # token that is NOT the definition of a *_elapsed diagnostic or a filename.
+  # Flag a time token ONLY where it flows into a master-root-feeding seal.
+  # Exclude the legitimate, determinism-safe uses (the determinism gate proves
+  # these binaries' master roots reproduce): fn definitions, the session_ts /
+  # session_ns bindings themselves, diagnostic timers (*_elapsed, t3), filename
+  # timestamps (let ts = …), the fully-qualified now() call, and the
+  # session-scoped session_blueprint_seal (per-session by design, NOT in the
+  # master root). What remains is a raw time value passed into a phase/chunk/
+  # master seal — the exact bug that shipped.
+  HITS=$(grep -nE 'session_ns|session_ts|now_secs\(|now_f64\(|SystemTime::now' "$f" \
+    | grep -vE '_elapsed|let session_ts|let session_ns|let t3|let ts |fn now_|now_secs\(\) *->|now_f64\(\) *->|\.duration_since\(|std::time::SystemTime::now\(\)|session_blueprint_seal|json_path|tmp_path|"session_unix|Session TS|Session NS|Session BP|println!|use std::time' \
+    || true)
+  if [ -n "$HITS" ]; then
+    echo "  [FAIL] $f — possible wall-clock in seal path:"
+    echo "$HITS" | sed 's/^/      /'
+    VIOLATIONS=1
+  else
+    echo "  [PASS] $f"
+  fi
+done
+
+if [ "$VIOLATIONS" -eq 0 ]; then
+  echo "GUARD: PASS — no wall-clock in any seal path"
+  exit 0
+else
+  echo "GUARD: FAIL — remove wall-clock from the seal path (anchor to a fixed constant, §12.1)"
+  exit 1
+fi

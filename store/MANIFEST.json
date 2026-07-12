@@ -1,0 +1,10 @@
+{
+  "store": "URS/DUX SOVEREIGN ARTIFACT BUNDLE",
+  "addressing": "content-addressed (sha256); WORM — objects immutable, drift breaks bundle_root",
+  "hash": "sha256",
+  "bundle_root": "56dca82e985024e5fe341b0a1ac48a385be724794d816ca49af092024cd279c8",
+  "object_count": 11,
+  "artifacts": [
+    { "path": "urs/proof/urs_1m_scenario_audit.json", "sha256": "b065e4bc15d50e86577d5aaca6dde5ec1bc4c3688fa9c790550500e36908cc8b", "size": 814 },    { "path": "urs/proof/urs_100k_scenario_audit.json", "sha256": "a11611bee6d4e262a4ae809396df77690c15e250b813ccb8f328196926e81657", "size": 809 },    { "path": "urs/proof/urs_1quintillion_exascale_proof.json", "sha256": "759d8bddc2ea9deb9d0032bbd3d3d8c53127501a5e46d5006d947112e98400c2", "size": 9796 },    { "path": "urs/proof/urs_audit_proof.json", "sha256": "7d72dfb8e8ef26fc1eb7426712fbbac2d7ab2a60f32da18884cedd96bd06169b", "size": 6436 },    { "path": "urs/compliance/soc2_controls_map.json", "sha256": "5c7de46c6b78d8f144c8b1c929d9af4b27ba31e021627fcd515fd3fb281cf60e", "size": 2569 },    { "path": "urs/compliance/hipaa_safeguards_map.json", "sha256": "c98f21438b572dcae6d5b27df5ea1d2cb5c41cc6de691038bae773aad01c2015", "size": 2303 },    { "path": "validation/records/dynasty_records_manifest.json", "sha256": "d7f4de9b4d3eecccf5ddf33cd7a93b99224d2f63d61f18514e8c4b95c69e907c", "size": 3640 },    { "path": "validation/records/SPINTRONIC_LATTICE_5d64e56c.json", "sha256": "c5befb0d439fc949a869a81902d07fcb282b34c7edef62e250e84fc21f454861", "size": 2155 },    { "path": "verify_dynasty_records.sh", "sha256": "9c7ef4f012551e3b0b761c63c971ead7a035eba9840e4255e5089cabbb3ef701", "size": 4584 },    { "path": "scripts/determinism_gate.sh", "sha256": "204060d068764b61019dd6a0c8e56d0f9a5e3f99e4de3c1941a0c52b8c9b0550", "size": 4055 },    { "path": "scripts/no_walltime_in_seals.sh", "sha256": "b6203ee1514e9074f606b80eaee04497349ca799fd8c4f9e9688e3de7b039ec0", "size": 2945 }
+  ]
+}

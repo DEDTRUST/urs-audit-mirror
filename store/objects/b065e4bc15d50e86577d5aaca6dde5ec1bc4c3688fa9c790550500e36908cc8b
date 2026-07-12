@@ -1,0 +1,21 @@
+{
+  "proof": "URS 100K SCENARIO AUDIT",
+  "engine": "Substrate Interaction Fabric → Intent Thermodynamics · Quantum Navigation · Swarm Layout",
+  "hash_function": "SHA256d",
+  "total_scenarios": 1000000,
+  "accessible": 1000000,
+  "self_verified": 1000000,
+  "all_navigable": true,
+  "pass_rate": "100.0%",
+  "intents_covered": ["act", "browse", "help", "resume", "search"],
+  "destinations_covered": ["catalog", "help", "search", "work_order"],
+  "chunk_size": 10000,
+  "chunks": 100,
+  "master_session_root": "cb80d4ef4de1e108ccb2ba48366fef890b93c6bf4ec2f5df3472a04d25603535",
+  "audit_seal": "15eb0f1606be29d3b58efa3dff848a5519bdd5039e19999fb1a54a70eeae0418",
+  "deterministic": true,
+  "o1_memory": true,
+  "simulation": false,
+  "elapsed_s_report_only": 46.101,
+  "scenarios_per_sec_report_only": 21692
+}
