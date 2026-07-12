@@ -1,0 +1,18 @@
+{
+  "algorithm": "SHA-256",
+  "bundle_root": "f39654c05acd06b3be6b59f68b3465ea3307b459582dfcd6136896323a3a1d2e",
+  "files": [
+    {
+      "path": "bundle/metadata.json",
+      "sha256": "5cc73ae3ddaf796d61bcd312ae908a1dc7119e0d09bffa628aee18bbfe96514b"
+    },
+    {
+      "path": "bundle/outputs/audit_report.json",
+      "sha256": "00aebc80577267c19f09c478c1b8957d3199575871ea348372be202e40c73eac"
+    },
+    {
+      "path": "bundle/outputs/schema.json",
+      "sha256": "4dc1fe88fe5dcae852029336eeb5330425d668c4e40df37041a58f8882e59f4c"
+    }
+  ]
+}

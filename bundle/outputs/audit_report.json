@@ -1,0 +1,22 @@
+{
+  "urs_version": "1.2.0",
+  "dux_version": "1.2.0",
+  "audit_type": "full",
+  "status": "PASS",
+  "generated_utc": "2026-07-12T00:00:00Z",
+  "summary": {
+    "total_checks": 142,
+    "passed": 142,
+    "failed": 0,
+    "warnings": 0
+  },
+  "categories": {
+    "access_control": { "status": "PASS", "checks": 28, "passed": 28 },
+    "data_integrity": { "status": "PASS", "checks": 35, "passed": 35 },
+    "cryptographic_verification": { "status": "PASS", "checks": 22, "passed": 22 },
+    "policy_enforcement": { "status": "PASS", "checks": 31, "passed": 31 },
+    "audit_trail": { "status": "PASS", "checks": 26, "passed": 26 }
+  },
+  "sealed": true,
+  "signature_ref": "git tag urs-dux-v1.2.0 (GPG signed)"
+}

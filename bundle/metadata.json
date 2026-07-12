@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "project": "URS/DUX",
+  "release": "v1.2.0",
+  "bundle_type": "audit-mirror",
+  "description": "Sealed outputs for independent third-party verification. No source code included.",
+  "created_utc": "2026-07-12T00:00:00Z",
+  "repository": "https://github.com/DEDTRUST/urs-audit-mirror",
+  "verify_script": "verify_bundle.ps1",
+  "algorithm": "SHA-256",
+  "bundle_root_algorithm": "SHA-256 of sorted (hash  relative_path) lines"
+}
